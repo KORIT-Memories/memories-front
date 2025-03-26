@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
+    "baseUrl": ".", // memories-front라는 폴더가 상대 경로의 기준이 된다
     "lib": [
       "dom",
       "dom.iterable",
