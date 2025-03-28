@@ -4,9 +4,6 @@ import { Outlet, useLocation, useNavigate } from 'react-router';
 import './style.css';
 import { ACCESS_TOKEN, AUTH_ABSOLUTE_PATH, CONCENTRATION_TEST_ABSOLUTE_PATH, DIARY_ABSOLUTE_PATH, MAIN_ABSOLUTE_PATH, MEMORY_TEST_ABSOLUTE_PATH, ROOT_PATH } from 'src/constants';
 import { useCookies } from 'react-cookie';
-import { getSignInUserRequest } from 'src/apis';
-import { GetSignInUserResponseDto } from 'src/apis/dto/user';
-import { ResponseDto } from 'src/apis/dto/response';
 import { useSignInUserStore } from 'src/stores';
 import { useSignInUser } from 'src/hooks';
 
@@ -68,6 +65,7 @@ export default function Layout() {
   // event handler: 로그아웃 클릭 이벤트 처리 //
   const onSignOutClickHandler = () => {
     removeCookie(ACCESS_TOKEN, { path: ROOT_PATH });
+    navigator(AUTH_ABSOLUTE_PATH);
     resetSignInUser();
   }
 
@@ -79,7 +77,10 @@ export default function Layout() {
 
   // effect: cookie의 accessToken과 경로가 변경될 시 실행할 함수 //
   useEffect(() => {
-    if (!cookies[ACCESS_TOKEN]) navigator(AUTH_ABSOLUTE_PATH);
+    if (!cookies[ACCESS_TOKEN]) {
+      navigator(AUTH_ABSOLUTE_PATH);
+      return;
+    }
     getSignInUser();
   }, [cookies[ACCESS_TOKEN], pathname]);
 

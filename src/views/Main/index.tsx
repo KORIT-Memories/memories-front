@@ -12,7 +12,7 @@ export default function Main() {
         <div id='main-wrapper'>
             <UserInfo />
             <RecentlyMemory />
-            <RecentlyConcentration />
+            <RecentlyConcentration />   
         </div>
     )
 }
